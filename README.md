@@ -31,10 +31,10 @@ The implementation is designed to be modular, allowing users to define new Hamil
 ├── Conv_test.py
 ├── MPS.py
 ├── MPO.py
-├── Hamiltonians/
-│   ├── Hubbard_MPO.py
-│   ├── InfiniteU_MPO.py
-│   └── ...
+|   ├── Hamiltonians/
+│       ├── Hubbard_MPO.py
+│       ├── InfiniteU_MPO.py
+│       └── ...
 ├── plots/
 ├── data/
 └── README.md
@@ -52,7 +52,7 @@ Main functionalities:
 * Canonicalization
 * Left and right normalization
 * Tensor manipulations
-* Computation of expectation values
+* Computation of expectation values, order parameters, entanglement entropy,...
 
 ---
 
@@ -64,7 +64,9 @@ Main functionalities:
 
 * Construction of matrix product operators
 * MPO algebra utilities
-* Interfaces for custom Hamiltonians
+* DMRG variational procedure
+* Saving ground states MPS and informations into .txt or .npz files
+  
 
 ---
 
@@ -91,6 +93,7 @@ Typical tests include:
 * Energy convergence
 * Bond-dimension dependence
 * Truncation error analysis
+* ED comparaison
 
 ---
 
@@ -101,7 +104,6 @@ Specific Hamiltonians are implemented as subclasses of the `MPO` base class.
 Examples:
 
 * Hubbard model
-* Extended Hubbard model
 * Constrained models
 * Spin-dependent interaction models
 
@@ -113,47 +115,28 @@ New Hamiltonians can be implemented by inheriting from `MPO` and defining the lo
 
 ### Basic Example
 
-```python
-from MPS import MPS
-from Hubbard_MPO import HubbardMPO
 
-L = 20
-chi = 50
-
-H = HubbardMPO(L=L, U=100.0, t=1.0)
-
-psi = MPS.random(L, chi)
-
-energy = psi.DMRG(H)
-
-print("Ground-state energy =", energy)
-```
 
 ---
 
-### Running a Simulation
+mpo=Hubbard_V_int_MPO(L=50, V_r=[1,0], t=1, mu_a=0, mu_c=0)
+filename = f"Hubbard_V_int_(L,D){L,D}_(t,mu_a,mu_c,V_r){t,float(mu_a),float(mu_c),mpo.V_r}.txt"
+mpo.store_MPS(D=50,sweeps=3, tol=1e-8, zip=True, twosite=True)
+mpo.store_zip_informations(filename)
+mps,_= mpo.get_zip_MPS(filename)
 
-```bash
-python main.py
-```
-
----
-
-### Convergence Tests
-
-```bash
-python Conv_test.py
-```
+print(infos["c"])
+print(mpo.energy(mps))
 
 ---
+
 
 ## Example
 
 A typical workflow consists of:
 
 1. Choosing a Hamiltonian MPO.
-2. Initializing an MPS with bond dimension `χ`.
-3. Running DMRG sweeps until convergence.
+2. (Running DMRG sweeps until convergence) and saving MPS into a file.
 4. Computing observables:
 
    * Energy
@@ -162,15 +145,6 @@ A typical workflow consists of:
    * Species ratios
 5. Visualizing the resulting phase diagram.
 
-Example output:
-
-```text
-Sweep 1 : E = -12.4517
-Sweep 2 : E = -12.7321
-Sweep 3 : E = -12.7418
-...
-Converged after 8 sweeps
-```
 
 ---
 
@@ -178,7 +152,8 @@ Converged after 8 sweeps
 
 ### Numerical Accuracy
 
-The quality of the results depends strongly on the chosen bond dimension `χ`.
+The quality of the results depends strongly on the chosen bond dimension `χ` 
+(or equivalently the tolerence above which the singular values are kept).
 
 For critical or highly entangled states, larger bond dimensions may be required.
 
@@ -218,4 +193,4 @@ Annals of Physics **326**, 96 (2011).
 
 ## License
 
-This project is released under the MIT License.
+This project is released under the GNU GENERAL PUBLIC LICENSE.
