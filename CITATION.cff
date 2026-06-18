@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "DMRG-algorithm"
+title: "Master-thesis-DMRG-code"
 authors:
   - name: "Thibaud Lesquereux"
     github: "thibaud737"
 license: "GNU"
-repository-code: "https://github.com/thibaud737/DMRG-algorithm"
-date-released: "2025-05-27"
+repository-code: "https://github.com/thibaud737/Master-thesis-DMRG-code"
+date-released: "2026-06-19"
 version: "main"
-url: "https://github.com/thibaud737/DMRG-algorithm"
+url: "https://github.com/thibaud737/Master-thesis-DMRG-code"
 type: software
