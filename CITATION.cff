@@ -4,7 +4,7 @@ title: "Master-thesis-DMRG-code"
 authors:
   - name: "Thibaud Lesquereux"
     github: "thibaud737"
-license: "GNU"
+license: "GNU GENERAL PUBLIC LICENSE"
 repository-code: "https://github.com/thibaud737/Master-thesis-DMRG-code"
 date-released: "2026-06-19"
 version: "main"
