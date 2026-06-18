@@ -33,7 +33,7 @@ The implementation is designed to be modular, allowing users to define new Hamil
 ├── MPO.py
 |   ├── Hamiltonians/
 │       ├── Hubbard_MPO.py
-│       ├── InfiniteU_MPO.py
+│       ├── Hubbard_U_inf_MPO.py
 │       └── ...
 ├── plots/
 ├── data/
