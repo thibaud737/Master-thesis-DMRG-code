@@ -23,22 +23,7 @@ The implementation is designed to be modular, allowing users to define new Hamil
 
 ---
 
-## File Structure
 
-```text
-.
-├── main.py
-├── Conv_test.py
-├── MPS.py
-├── MPO.py
-|   ├── Hamiltonians/
-│       ├── Hubbard_MPO.py
-│       ├── Hubbard_U_inf_MPO.py
-│       └── ...
-├── plots/
-├── data/
-└── README.md
-```
 
 ### Core Files
 
